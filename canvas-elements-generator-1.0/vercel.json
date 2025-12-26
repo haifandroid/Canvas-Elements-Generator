@@ -1,3 +1,4 @@
 {
-  "rootDirectory": "canvas-elements-generator-1.0"
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist"
 }
