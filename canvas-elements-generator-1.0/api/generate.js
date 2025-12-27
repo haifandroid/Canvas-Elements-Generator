@@ -1,3 +1,7 @@
+export const config = {
+  runtime: "nodejs",
+};
+
 import { GoogleGenAI } from "@google/genai";
 
 export default async function handler(req, res) {
@@ -6,7 +10,7 @@ export default async function handler(req, res) {
   }
 
   try {
-    const { prompt, type } = req.body;
+    const { prompt, type } = req.body || {};
 
     if (!prompt || !type) {
       return res.status(400).json({ error: "Missing prompt or type" });
