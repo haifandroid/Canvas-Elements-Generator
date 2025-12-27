@@ -1,7 +1,6 @@
-import type { VercelRequest, VercelResponse } from "vercel";
 import { GoogleGenAI } from "@google/genai";
 
-export default async function handler(req: VercelRequest, res: VercelResponse) {
+export default async function handler(req, res) {
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Method not allowed" });
   }
@@ -14,7 +13,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     }
 
     const ai = new GoogleGenAI({
-      apiKey: process.env.GOOGLE_API_KEY as string,
+      apiKey: process.env.GOOGLE_API_KEY,
     });
 
     const response = await ai.models.generateContent({
@@ -38,7 +37,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     res.status(200).json({
       image: `data:image/png;base64,${imageBase64}`,
     });
-  } catch (err: any) {
+  } catch (err) {
     console.error(err);
     res.status(500).json({ error: "Generation failed" });
   }
